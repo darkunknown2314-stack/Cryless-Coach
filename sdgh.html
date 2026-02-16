@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryless Elite | Coaching, Boosting & Merch</title>
+    <style>
+        :root {
+            --primary: #ff9d00;
+            --secondary: #ff4500;
+            --dark: #050505;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --text: #ffffff;
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark);
+            color: var(--text);
+            margin: 0;
+            background: radial-gradient(circle at 50% 0%, #2e1a1a, #050505);
+            min-height: 100vh;
+        }
+
+        nav {
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--primary);
+            position: sticky; top: 0; z-index: 1000;
+        }
+
+        .logo-box { display: flex; align-items: center; gap: 12px; }
+        .logo-box img { width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--primary); }
+        .logo-box span { font-size: 1.8rem; font-weight: 900; color: var(--primary); text-transform: uppercase; }
+
+        .nav-links button {
+            background: none; border: none; color: white; margin: 0 10px;
+            cursor: pointer; font-weight: 700; text-transform: uppercase; font-size: 0.85rem;
+        }
+
+        .page-section { display: none; padding: 60px 8%; animation: fadeIn 0.5s ease; }
+        .active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+        
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 20px; border-radius: 15px; text-align: center; transition: 0.3s;
+        }
+        .card:hover { border-color: var(--primary); transform: translateY(-5px); }
+
+        .price { color: var(--primary); font-size: 1.5rem; font-weight: 800; margin: 10px 0; }
+        
+        .btn {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; 
+            font-weight: 900; cursor: pointer; text-transform: uppercase;
+        }
+
+        .info-input {
+            width: 100%; padding: 12px; margin-top: 10px; background: #111;
+            border: 1px solid #333; color: white; border-radius: 8px;
+        }
+
+        .cart-ui {
+            background: rgba(10, 10, 10, 0.95);
+            padding: 30px; border-radius: 20px; border: 1px solid var(--primary);
+            max-width: 800px; margin: 40px auto;
+        }
+        
+        .cart-item { display: flex; justify-content: space-between; padding: 15px; border-bottom: 1px solid #222; }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo-box">
+        <img src="cryless new pfp.jpg" alt="Logo">
+        <span>Cryless Elite</span>
+    </div>
+    <div class="nav-links">
+        <button onclick="showPage('home')">Home</button>
+        <button onclick="showPage('cs2')">CS2</button>
+        <button onclick="showPage('rl')">Rocket League</button>
+        <button onclick="showPage('fortnite')">Fortnite</button>
+        <button onclick="showPage('merch')">Merch</button>
+        <button onclick="showPage('cart-page')">🛒 Kurv (<span id="cart-count">0</span>)</button>
+    </div>
+</nav>
+
+<div id="home" class="page-section active" style="text-align:center; padding-top: 100px;">
+    <h1>CRYLESS ELITE</h1>
+    <p style="color: var(--primary);">High-End Boosting & Coaching</p>
+</div>
+
+<div id="cs2" class="page-section">
+    <h2>CS2 Rank Boosting & Coaching</h2>
+    <div class="grid">
+        <script>
+            const cs2Items = [
+                {n: "Silver to Gold Nova", p: 150}, {n: "Gold Nova to MG", p: 200},
+                {n: "MG to DMG", p: 250}, {n: "DMG to LE", p: 300},
+                {n: "LE to Supreme", p: 350}, {n: "Supreme to Global", p: 450},
+                {n: "Faceit Level 1-5", p: 200}, {n: "Faceit Level 5-10", p: 500},
+                {n: "1 Hour Live Coaching", p: 150}, {n: "Full Demo Review", p: 100}
+            ];
+            cs2Items.forEach(i => document.write(`<div class="card"><h3>${i.n}</h3><div class="price">${i.p} DKK</div><button class="btn" onclick="addToCart('${i.n}', ${i.p})">Add to Cart</button></div>`));
+        </script>
+    </div>
+</div>
+
+<div id="rl" class="page-section">
+    <h2>Rocket League Rank Boosting</h2>
+    <div class="grid">
+        <script>
+            const rlItems = [
+                {n: "Bronze to Silver", p: 50}, {n: "Silver to Gold", p: 80},
+                {n: "Gold to Platinum", p: 120}, {n: "Platinum to Diamond", p: 180},
+                {n: "Diamond to Champ", p: 250}, {n: "Champ to GC", p: 400},
+                {n: "GC to SSL", p: 800}, {n: "Tournament Win", p: 150},
+                {n: "1 Hour Mechanics Coach", p: 150}, {n: "Replay Analysis", p: 75}
+            ];
+            rlItems.forEach(i => document.write(`<div class="card"><h3>${i.n}</h3><div class="price">${i.p} DKK</div><button class="btn" onclick="addToCart('${i.n}', ${i.p})">Add to Cart</button></div>`));
+        </script>
+    </div>
+</div>
+
+<div id="fortnite" class="page-section">
+    <h2>Fortnite Arena & Rank Boosting</h2>
+    <div class="grid">
+        <script>
+            const fnItems = [
+                {n: "Bronze to Silver", p: 50}, {n: "Silver to Gold", p: 100},
+                {n: "Gold to Platinum", p: 150}, {n: "Platinum to Diamond", p: 200},
+                {n: "Diamond to Elite", p: 300}, {n: "Elite to Champion", p: 450},
+                {n: "Champion to Unreal", p: 700}, {n: "20 Bomb Quest", p: 200},
+                {n: "1 Hour Piece Control Coach", p: 150}, {n: "Boxfight Training", p: 100}
+            ];
+            fnItems.forEach(i => document.write(`<div class="card"><h3>${i.n}</h3><div class="price">${i.p} DKK</div><button class="btn" onclick="addToCart('${i.n}', ${i.p})">Add to Cart</button></div>`));
+        </script>
+    </div>
+</div>
+
+<div id="merch" class="page-section">
+    <h2>Official Merch</h2>
+    <div class="grid">
+        <div class="card"><h3>Cryless Hoodie</h3><div class="price">349 DKK</div><button class="btn" onclick="addToCart('Cryless Hoodie', 349)">Add to Cart</button></div>
+        <div class="card"><h3>Cryless Mousepad</h3><div class="price">199 DKK</div><button class="btn" onclick="addToCart('Cryless Mousepad', 199)">Add to Cart</button></div>
+    </div>
+</div>
+
+<div id="cart-page" class="page-section">
+    <div class="cart-ui">
+        <h2>Din Kurv</h2>
+        <div id="cart-content">Din kurv er tom...</div>
+        
+        <form action="https://formspree.io/f/xbdayyee" method="POST" onsubmit="return handleCheckout(event)">
+            <div style="margin-top: 30px; border-top: 1px solid #333; padding-top: 20px;">
+                <input type="hidden" name="Bestilling" id="hidden-items">
+                <input type="hidden" name="Total_Beløb" id="hidden-total">
+                
+                <h3>Dine Oplysninger</h3>
+                <input type="text" name="Kunde_Navn" class="info-input" placeholder="Fulde Navn" required>
+                <input type="email" name="Kunde_Email" class="info-input" placeholder="E-mail" required>
+                <input type="text" name="Adresse" class="info-input" placeholder="Adresse (Gadenavn, Postnr, By)" required>
+                <input type="text" name="Game_ID" class="info-input" placeholder="Discord eller Steam ID" required>
+
+                <div style="font-size: 2rem; font-weight: bold; margin: 20px 0;">Total: <span id="cart-total" style="color:var(--primary)">0</span> DKK</div>
+                <button type="submit" class="btn" style="background:#ffc439; color:black; font-size: 1.2rem;">Køb nu & Send Information</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    let cart = {};
+
+    function showPage(id) {
+        document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+    }
+
+    function addToCart(name, price) {
+        if(cart[name]) { cart[name].qty++; } 
+        else { cart[name] = { price: price, qty: 1 }; }
+        updateUI();
+        alert(name + " tilføjet!");
+    }
+
+    function updateUI() {
+        let count = 0, total = 0;
+        const content = document.getElementById('cart-content');
+        content.innerHTML = "";
+        for(let name in cart) {
+            count += cart[name].qty;
+            let itemTotal = cart[name].price * cart[name].qty;
+            total += itemTotal;
+            content.innerHTML += `<div class="cart-item"><b>${name} (x${cart[name].qty})</b> <span>${itemTotal} DKK</span></div>`;
+        }
+        document.getElementById('cart-count').innerText = count;
+        document.getElementById('cart-total').innerText = total;
+    }
+
+    function handleCheckout(event) {
+        const total = document.getElementById('cart-total').innerText;
+        if(total === "0") { alert("Kurven er tom!"); return false; }
+
+        let summary = "";
+        for(let name in cart) { summary += name + " (x" + cart[name].qty + "), "; }
+        document.getElementById('hidden-items').value = summary;
+        document.getElementById('hidden-total').value = total + " DKK";
+
+        window.open("https://www.paypal.me/IzzetIsha/" + total, "_blank");
+        return true;
+    }
+</script>
+</body>
+</html>
